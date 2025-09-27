@@ -2484,6 +2484,8 @@ $(obj).$(TOOLSET)/$(TARGET)/%%.o: $(obj)/%%%s FORCE_DO_CMD
     def Absolutify(self, path):
         """Convert a subdirectory-relative path into a base-relative path.
         Skips over paths that contain variables."""
+        """In MINGW node -p return a path with double quote"""
+        path = path.strip('"')
         if "$(" in path:
             # Don't call normpath in this case, as it might collapse the
             # path too aggressively if it features '..'. However it's still
